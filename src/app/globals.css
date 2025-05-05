@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-lamaSky: #c3ebfa;
+  --color-lamaSkyLight: #edf9fd;
+  --color-lamaPurple: #cfceff;
+  --color-lamaPurpleLight: #f1f0ff;
+  --color-lamaYellow: #fae27c;
+  --color-lamaYellowLight: #fefce8;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --lamaSky: #c3ebfa;
 }
 
 @theme inline {
@@ -23,4 +33,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+  font-family: "Inter", sans-serif;
+}
+
+.react-calendar__tile--active {
+  background-color: #c3ebfa !important ;
+  color: black !important;
+}
+
+.react-calendar__navigation__label__labelText {
+  font-weight: 600 !important;
+  text-transform: capitalize !important;
 }
