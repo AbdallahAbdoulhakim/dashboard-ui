@@ -4,7 +4,7 @@ import Performance from "@/components/Performance";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SingleTeacherPage() {
+export default function SingleStudentPage() {
   return (
     <div className="flex-1 p-4 flex flex-col xl:flex-row gap-4">
       {/* LEFT */}
@@ -17,14 +17,14 @@ export default function SingleTeacherPage() {
               <div className="w-1/3">
                 <Image
                   className="w-36 h-36 rounded-full object-cover"
-                  src="https://images.pexels.com/photos/2888150/pexels-photo-2888150.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1200"
                   alt=""
                   width={144}
                   height={144}
                 />
               </div>
               <div className="w-2/3 flex flex-col justify-between gap-4">
-                <h1 className="text-xl font-semibold">Leonard Snyder</h1>
+                <h1 className="text-xl font-semibold">Cameron Moran</h1>
                 <p className="text-sm text-gray-500">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Minus, nam.
@@ -61,7 +61,7 @@ export default function SingleTeacherPage() {
                   height={24}
                 />
                 <div className="">
-                  <h1 className="text-xl font-semibold">90%</h1>
+                  <h1 className="text-xl font-semibold">94%</h1>
                   <span className="text-sm text-gray-400">Attendance</span>
                 </div>
               </div>
@@ -76,8 +76,8 @@ export default function SingleTeacherPage() {
                   height={24}
                 />
                 <div className="">
-                  <h1 className="text-xl font-semibold">2</h1>
-                  <span className="text-sm text-gray-400">Branches</span>
+                  <h1 className="text-xl font-semibold">6th</h1>
+                  <span className="text-sm text-gray-400">Grade</span>
                 </div>
               </div>
 
@@ -91,7 +91,7 @@ export default function SingleTeacherPage() {
                   height={24}
                 />
                 <div className="">
-                  <h1 className="text-xl font-semibold">6</h1>
+                  <h1 className="text-xl font-semibold">18</h1>
                   <span className="text-sm text-gray-400">Lessons</span>
                 </div>
               </div>
@@ -106,15 +106,15 @@ export default function SingleTeacherPage() {
                   height={24}
                 />
                 <div className="">
-                  <h1 className="text-xl font-semibold">6</h1>
-                  <span className="text-sm text-gray-400">Classes</span>
+                  <h1 className="text-xl font-semibold">6A</h1>
+                  <span className="text-sm text-gray-400">Class Name</span>
                 </div>
               </div>
             </div>
           </div>
           {/* BOTTOM */}
           <div className="mt-4 bg-white rounded-md p-4 g-[800px]">
-            <h1 className="">Teacher&apos;s Schedule</h1>
+            <h1 className="">Student&apos;s Schedule</h1>
             <BigCalendar />
           </div>
         </div>
@@ -125,13 +125,13 @@ export default function SingleTeacherPage() {
           <h1 className="text-xl font-semibold">Shortcuts</h1>
           <div className="mt-4 flex gap-2 flex-wrap text-xs text-gray-500">
             <Link className="p-3 rounded-md bg-lamaSkyLight" href="/">
-              Classes
+              Lessons
             </Link>
             <Link className="p-3 rounded-md bg-lamaPurpleLight" href="/">
-              Students
+              Teachers
             </Link>
             <Link className="p-3 rounded-md bg-lamaYellowLight" href="/">
-              Lessons
+              Results
             </Link>
             <Link className="p-3 rounded-md bg-pink-50" href="/">
               Exams

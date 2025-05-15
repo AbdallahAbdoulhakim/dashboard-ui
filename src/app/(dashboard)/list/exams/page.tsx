@@ -2,8 +2,8 @@ import Image from "next/image";
 import TableSearch from "@/components/TableSearch";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
-import Link from "next/link";
 import { role, examsData } from "@/lib/data";
+import FormModal from "@/components/FormModal";
 
 type Lesson = {
   id: number;
@@ -50,15 +50,11 @@ export default function ExamsListPage() {
       <td className="hidden md:table-cell">{item.date}</td>
       <td className="">
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky cursor-pointer active:scale-95">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple cursor-pointer active:scale-95">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="exam" type="update" data={item} />
+              <FormModal table="exam" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -79,11 +75,7 @@ export default function ExamsListPage() {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow cursor-pointer hover:bg-lamaYellowLight active:scale-95">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow cursor-pointer hover:bg-lamaYellowLight active:scale-95">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
-            )}
+            {role === "admin" && <FormModal table="exam" type="create" />}
           </div>
         </div>
       </div>
