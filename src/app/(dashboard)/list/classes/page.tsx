@@ -2,7 +2,6 @@ import Image from "next/image";
 import TableSearch from "@/components/TableSearch";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
-import Link from "next/link";
 import { role, classesData } from "@/lib/data";
 import FormModal from "@/components/FormModal";
 
@@ -54,7 +53,7 @@ export default function ClassesListPage() {
         <div className="flex items-center gap-2">
           {role === "admin" && (
             <>
-              <FormModal table="class" type="update" id={item.id} />
+              <FormModal table="class" type="update" data={item} />
               <FormModal table="class" type="delete" id={item.id} />
             </>
           )}

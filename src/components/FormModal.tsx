@@ -1,7 +1,63 @@
 "use client";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
-import TeacherForm from "./forms/TeacherForm";
+import { JSX, useState } from "react";
+import Spinner from "./Spinner";
+
+const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
+  loading: () => <Spinner />,
+});
+
+const StudentForm = dynamic(() => import("./forms/StudentForm"), {
+  loading: () => <Spinner />,
+});
+
+const ParentForm = dynamic(() => import("./forms/ParentForm"), {
+  loading: () => <Spinner />,
+});
+
+const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), {
+  loading: () => <Spinner />,
+});
+
+const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
+  loading: () => <Spinner />,
+});
+
+const ClassForm = dynamic(() => import("./forms/ClassForm"), {
+  loading: () => <Spinner />,
+});
+
+const LessonForm = dynamic(() => import("./forms/LessonForm"), {
+  loading: () => <Spinner />,
+});
+
+const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+  loading: () => <Spinner />,
+});
+
+const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"), {
+  loading: () => <Spinner />,
+});
+
+const ResultForm = dynamic(() => import("./forms/ResultForm"), {
+  loading: () => <Spinner />,
+});
+
+const forms: {
+  [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
+} = {
+  teacher: (type, data) => <TeacherForm type={type} data={data} />,
+  student: (type, data) => <StudentForm type={type} data={data} />,
+  parent: (type, data) => <ParentForm type={type} data={data} />,
+  subject: (type, data) => <SubjectForm type={type} data={data} />,
+  class: (type, data) => <ClassForm type={type} data={data} />,
+  lesson: (type, data) => <LessonForm type={type} data={data} />,
+  announcement: (type, data) => <AnnouncementForm type={type} data={data} />,
+  exam: (type, data) => <ExamForm type={type} data={data} />,
+  assignment: (type, data) => <AssignmentForm type={type} data={data} />,
+  result: (type, data) => <ResultForm type={type} data={data} />,
+};
 
 export default function FormModal({
   table,
@@ -46,8 +102,10 @@ export default function FormModal({
           Yes, Delete
         </button>
       </form>
+    ) : type === "create" || type === "update" ? (
+      forms[table](type, data)
     ) : (
-      <TeacherForm type="create" />
+      "Form Not Found!"
     );
   };
 

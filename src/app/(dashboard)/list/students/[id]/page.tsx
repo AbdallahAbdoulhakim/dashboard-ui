@@ -3,6 +3,7 @@ import BigCalendar from "@/components/BigCalendar";
 import Performance from "@/components/Performance";
 import Image from "next/image";
 import Link from "next/link";
+import FormModal from "@/components/FormModal";
 
 export default function SingleStudentPage() {
   return (
@@ -24,7 +25,27 @@ export default function SingleStudentPage() {
                 />
               </div>
               <div className="w-2/3 flex flex-col justify-between gap-4">
-                <h1 className="text-xl font-semibold">Cameron Moran</h1>
+                <div className="flex items-center gap-4">
+                  <h1 className="text-xl font-semibold">Cameron Moran</h1>
+                  <FormModal
+                    table="student"
+                    type="update"
+                    data={{
+                      id: 1,
+                      username: "deanguerrero",
+                      email: "deanguerrero@gmail.com",
+                      password: "password",
+                      firstName: "Dean",
+                      lastName: "Guerrero",
+                      phone: "+1 234 567 89",
+                      address: "1234 Main St, Antown, USA",
+                      bloodType: "A+",
+                      birthDate: "2000-01-01",
+                      sex: "male",
+                      img: "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                    }}
+                  />
+                </div>
                 <p className="text-sm text-gray-500">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Minus, nam.

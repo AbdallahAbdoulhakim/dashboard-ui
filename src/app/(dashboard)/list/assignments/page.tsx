@@ -2,7 +2,6 @@ import Image from "next/image";
 import TableSearch from "@/components/TableSearch";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
-import Link from "next/link";
 import { role, assignmentsData } from "@/lib/data";
 import FormModal from "@/components/FormModal";
 
@@ -53,7 +52,7 @@ export default function AssignmentsListPage() {
         <div className="flex items-center gap-2">
           {role === "admin" && (
             <>
-              <FormModal table="assignment" type="update" id={item.id} />
+              <FormModal table="assignment" type="update" data={item} />
               <FormModal table="assignment" type="delete" id={item.id} />
             </>
           )}

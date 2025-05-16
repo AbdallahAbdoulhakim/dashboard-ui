@@ -21,11 +21,12 @@ export default function InputField({
 }: InputFieldProps) {
   return (
     <div className="flex flex-col gap-2 w-full md:w-1/4">
-      <label className="text-xs text-gray-500" htmlFor="">
+      <label className="text-xs text-gray-500" htmlFor={name}>
         {label}
       </label>
 
       <input
+        id={name}
         className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
         type={type}
         {...register(name)}

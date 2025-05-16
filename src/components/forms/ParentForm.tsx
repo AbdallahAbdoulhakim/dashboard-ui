@@ -39,7 +39,7 @@ const schema = z.object({
 
 type Inputs = z.infer<typeof schema>;
 
-export default function TeacherForm({
+export default function ParentForm({
   type,
   data,
 }: {
@@ -59,7 +59,7 @@ export default function TeacherForm({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new teacher" : "Update Teacher"}
+        {type === "create" ? "Create a new parent" : "Update Parent"}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -152,6 +152,7 @@ export default function TeacherForm({
 
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            type={type}
             {...register("sex")}
             defaultValue={data?.sex}
           >
