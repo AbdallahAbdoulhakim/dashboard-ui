@@ -1,28 +1,71 @@
-export default function Pagination() {
+"use client";
+
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { useRouter } from "next/navigation";
+
+export default function Pagination({
+  url,
+  page,
+  count,
+}: {
+  url: string;
+  page: number;
+  count: number;
+}) {
+  const router = useRouter();
+
+  const changePage = (newPage: number) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", newPage.toString());
+    router.push(`${window.location.pathname}?${params}`);
+  };
+
+  const hasPrev = ITEM_PER_PAGE * (page - 1) > 0;
+  const hasNext = ITEM_PER_PAGE * (page - 1) + ITEM_PER_PAGE < count;
+
   return (
     <div className="p-4 flex items-center justify-between text-gray-500">
       <button
-        disabled
-        className="py-2 px-4 cursor-pointer rounded-md bg-slate-200 hover:bg-slate-400 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+        onClick={() => {
+          if (!hasPrev) {
+            return;
+          }
+          changePage(page - 1);
+        }}
+        disabled={!hasPrev}
+        className="py-2 px-4 cursor-pointer rounded-md bg-slate-200 hover:bg-slate-400 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 disabled:active:scale-100"
       >
         Prev
       </button>
       <div className="flex items-center gap-2 text-sm">
-        <button className="px-2 cursor-pointer rounded-sm hover:bg-lamaSkyLight bg-lamaSky active:scale-95">
-          1
-        </button>
-        <button className="px-2 cursor-pointer rounded-sm hover:bg-lamaSkyLight active:scale-95">
-          2
-        </button>
-        <button className="px-2 cursor-pointer rounded-sm hover:bg-lamaSkyLight active:scale-95">
-          3
-        </button>
-        ...
-        <button className="px-2 cursor-pointer rounded-sm hover:bg-lamaSkyLight active:scale-95">
-          10
-        </button>
+        {Array.from(
+          { length: Math.ceil(count / ITEM_PER_PAGE) },
+          (_, index) => {
+            const pageIndex = index + 1;
+            return (
+              <button
+                className={`px-2 rounded-sm  cursor-pointer active:scale-95 ${
+                  pageIndex === page ? "bg-lamaSky" : "bg-lamaSkyLight"
+                }`}
+                key={pageIndex}
+                onClick={() => changePage(pageIndex)}
+              >
+                {pageIndex}
+              </button>
+            );
+          }
+        )}
       </div>
-      <button className="py-2 px-4 cursor-pointer rounded-md bg-slate-200 hover:bg-slate-400 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed active:scale-95">
+      <button
+        onClick={() => {
+          if (!hasNext) {
+            return;
+          }
+          changePage(page + 1);
+        }}
+        disabled={!hasNext}
+        className="py-2 px-4 cursor-pointer rounded-md bg-slate-200 hover:bg-slate-400 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 active:scale-95 disabled:active:scale-100"
+      >
         Next
       </button>
     </div>

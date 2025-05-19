@@ -103,8 +103,8 @@ model Class {
   name String @unique
   capacity Int
   lessons Lesson[]
-  supervisor Teacher @relation(fields: [supervisorId], references: [id])
-  supervisorId String
+  supervisor Teacher? @relation(fields: [supervisorId], references: [id])
+  supervisorId String?
   students Student[]
   grade Grade @relation(fields: [gradeId], references: [id])
   gradeId Int
