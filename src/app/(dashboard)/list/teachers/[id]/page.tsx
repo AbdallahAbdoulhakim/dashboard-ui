@@ -145,13 +145,22 @@ export default function SingleTeacherPage() {
         <div className="bg-white p-4 rounded-md">
           <h1 className="text-xl font-semibold">Shortcuts</h1>
           <div className="mt-4 flex gap-2 flex-wrap text-xs text-gray-500">
-            <Link className="p-3 rounded-md bg-lamaSkyLight" href="/">
+            <Link
+              className="p-3 rounded-md bg-lamaSkyLight"
+              href={`/list/classes?supervisorId=${"teacher10"}`}
+            >
               Classes
             </Link>
-            <Link className="p-3 rounded-md bg-lamaPurpleLight" href="/">
+            <Link
+              className="p-3 rounded-md bg-lamaPurpleLight"
+              href={`/list/students/?teacherId=${"teacher1"}`}
+            >
               Students
             </Link>
-            <Link className="p-3 rounded-md bg-lamaYellowLight" href="/">
+            <Link
+              className="p-3 rounded-md bg-lamaYellowLight"
+              href={`/list/lessons?teacherId=${"teacher1"}`}
+            >
               Lessons
             </Link>
             <Link className="p-3 rounded-md bg-pink-50" href="/">

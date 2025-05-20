@@ -5,7 +5,7 @@ import Table from "@/components/Table";
 import Link from "next/link";
 import { role } from "@/lib/data";
 import FormModal from "@/components/FormModal";
-import { Class, Subject, Teacher } from "@/generated/prisma";
+import { Class, Prisma, Subject, Teacher } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 
@@ -98,24 +98,46 @@ export default async function TeachersListPage({
 
   const queryPage = page ? parseInt(page) : 1;
 
+  // URL PARAMS CONDITION
+
+  const query: Prisma.TeacherWhereInput = {};
+
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "classId":
+            {
+              query.lessons = {
+                some: {
+                  classId: parseInt(value),
+                },
+              };
+            }
+            break;
+          case "search": {
+            query.name = {
+              contains: value,
+              mode: "insensitive",
+            };
+          }
+        }
+      }
+    }
+  }
+
   const [data, count] = await prisma.$transaction([
     prisma.teacher.findMany({
-      where: {
-        lessons: {
-          some: { classId: parseInt(queryParams.classId!) },
-        },
-      },
+      where: query,
       include: {
-        subjects: true,
-        classes: true,
+        subjects: { select: { name: true } },
+        classes: { select: { name: true } },
       },
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (queryPage - 1),
     }),
-    prisma.teacher.count(),
+    prisma.teacher.count({ where: query }),
   ]);
-
-  console.log(count);
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
@@ -138,7 +160,7 @@ export default async function TeachersListPage({
       {/* LIST */}
       <Table columns={columns} renderRow={renderRow} data={data} />
       {/* PAGINATION */}
-      <Pagination url="/list/teachers" page={queryPage} count={count} />
+      <Pagination page={queryPage} count={count} />
     </div>
   );
 }

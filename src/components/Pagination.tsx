@@ -4,11 +4,9 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { useRouter } from "next/navigation";
 
 export default function Pagination({
-  url,
   page,
   count,
 }: {
-  url: string;
   page: number;
   count: number;
 }) {
@@ -44,8 +42,10 @@ export default function Pagination({
             const pageIndex = index + 1;
             return (
               <button
-                className={`px-2 rounded-sm  cursor-pointer active:scale-95 ${
-                  pageIndex === page ? "bg-lamaSky" : "bg-lamaSkyLight"
+                className={`px-2 rounded-sm   ${
+                  pageIndex === page
+                    ? "bg-lamaSky disabled active:scale-100 cursor-not-allowed"
+                    : "bg-lamaSkyLight cursor-pointer active:scale-95"
                 }`}
                 key={pageIndex}
                 onClick={() => changePage(pageIndex)}
