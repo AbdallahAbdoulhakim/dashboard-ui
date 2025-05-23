@@ -44,12 +44,16 @@ export default async function SubjectsListPage({
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "search": {
-            query.name = {
-              contains: value,
-              mode: "insensitive",
-            };
-          }
+          case "search":
+            {
+              query.name = {
+                contains: value,
+                mode: "insensitive",
+              };
+            }
+            break;
+          default:
+            break;
         }
       }
     }

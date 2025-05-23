@@ -107,12 +107,16 @@ export default async function ParentsListPage({
               };
             }
             break;
-          case "search": {
-            query.name = {
-              contains: value,
-              mode: "insensitive",
-            };
-          }
+          case "search":
+            {
+              query.name = {
+                contains: value,
+                mode: "insensitive",
+              };
+            }
+            break;
+          default:
+            break;
         }
       }
     }

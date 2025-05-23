@@ -80,15 +80,21 @@ export default async function LessonsListPage({
               query.classId = parseInt(value);
             }
             break;
-          case "search": {
-            query.OR = [
-              { subject: { name: { contains: value, mode: "insensitive" } } },
-              { teacher: { name: { contains: value, mode: "insensitive" } } },
-              {
-                teacher: { surname: { contains: value, mode: "insensitive" } },
-              },
-            ];
-          }
+          case "search":
+            {
+              query.OR = [
+                { subject: { name: { contains: value, mode: "insensitive" } } },
+                { teacher: { name: { contains: value, mode: "insensitive" } } },
+                {
+                  teacher: {
+                    surname: { contains: value, mode: "insensitive" },
+                  },
+                },
+              ];
+            }
+            break;
+          default:
+            break;
         }
       }
     }
