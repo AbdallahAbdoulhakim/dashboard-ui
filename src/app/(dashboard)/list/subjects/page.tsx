@@ -2,30 +2,14 @@ import Image from "next/image";
 import TableSearch from "@/components/TableSearch";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
-
-import { role } from "@/lib/data";
 import FormModal from "@/components/FormModal";
 
 import { Prisma, Subject, Teacher } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
+import { getRole } from "@/lib/utils";
 
 type SubjectList = Subject & { teachers: Teacher[] };
-const columns = [
-  {
-    header: "Subject Name",
-    accessor: "subject",
-  },
-  {
-    header: "Teachers",
-    accessor: "teachers",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "actions",
-  },
-];
 
 export default async function SubjectsListPage({
   searchParams,
@@ -35,6 +19,24 @@ export default async function SubjectsListPage({
   const { page, ...queryParams } = await searchParams;
 
   const queryPage = page ? parseInt(page) : 1;
+
+  const role = await getRole();
+
+  const columns = [
+    {
+      header: "Subject Name",
+      accessor: "subject",
+    },
+    {
+      header: "Teachers",
+      accessor: "teachers",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Actions",
+      accessor: "actions",
+    },
+  ];
 
   // URL PARAMS CONDITION
 
