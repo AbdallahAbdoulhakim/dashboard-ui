@@ -9,3 +9,7 @@ export const getUserId = async () => {
   const { userId } = await auth();
   return userId;
 };
+
+export function isValidDate(date: Date): boolean {
+  return !isNaN(date.getTime());
+}
